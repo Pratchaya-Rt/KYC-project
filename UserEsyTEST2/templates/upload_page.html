@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Database Form</title>
+    <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles_upload.css') }}"> -->
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #242248;
+        }
+
+        .container{
+            width: 350px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            background: #ffe387;
+            border-radius: 10px;
+            padding: 30px;
+            color: #3e3e3e;
+        }
+
+        .container h1 {
+            text-align: center;
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        form input[type="text"],
+        form input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 3px;
+        }
+
+        form input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background: none;
+            border: 2px solid #151616;
+            font-family: "monserrat",sans-serif;
+            text-transform: uppercase;
+            min-width: 200px;
+            margin: 10px;
+            cursor: pointer;
+            position: relative;
+            border-radius: 8px;
+            transition: color 0.4s linear;
+        }
+
+        form input[type="submit"]:hover {
+            color: #42b9f0;
+        }
+
+        form input[type="submit"]::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: #FF6969;
+            z-index: -1;
+            transition: transform 0.5s;
+            transform-origin: 0 0;
+            transition-timing-function: cubic-bezier(0.5,1.6,0.4,0.7);
+        }
+
+        form input[type="submit"].btn1::before {
+            transform: scaleX(0);
+        }
+
+        form input[type="submit"]:hover::before {
+            transform: scaleX(1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Database Form</h1>
+        <form action="/database" method="post" enctype="multipart/form-data">
+            <label for="id">ID:</label>
+            <input type="text" name="id" id="id" required>
+            <br>
+            <label for="status">Status:</label>
+            <input type="text" name="status" id="status" required>
+            <br>
+            <label for="image1">Image 1:</label>
+            <input type="file" name="image1" id="image1" accept="image/*" required>
+            <br>
+            <label for="image2">Image 2:</label>
+            <input type="file" name="image2" id="image2" accept="image/*" required>
+            <br>
+            <input type="submit" class="btn btn1" value="Submit">
+        </form>
+    </div>
+</body>
+</html>

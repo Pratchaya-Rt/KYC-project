@@ -1,0 +1,6 @@
+uvicorn main:app --reload
+    - main: filename py
+    - reload: auto reload
+
+URL/docs
+URL/redoc

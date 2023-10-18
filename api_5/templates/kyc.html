@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://kit.fontawesome.com/bce301cd6d.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
+      }
+    </style>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <link rel="stylesheet" href="static/css/style_main.css" />
+    <title>KYC</title>
+    <link rel="icon" href="data:,">
+  </head>
+  <body>
+    <!-- start page a -->
+    <div class="wrap-color" id="page-a">
+      <div class="page-a">
+        <nav class="main-nav">
+          <div class="nav-icon"></div>
+          <h1 id="text-header">Identity Verification</h1>
+          <h4 id="text-header2">Upload your Face & ID</h4>
+        </nav>
+        <form id="image-card">
+          <div id="form-upload">
+            <div id="sub-form-upload">
+              <h5 id="up-text">Front side of ID card</h5>
+
+              <div class="display_image" id="display_image_face">
+                <label for="image_input_face" class="btn-face-add">+ Add</label>
+                <input
+                  type="file"
+                  id="image_input_face"
+                  name="files"
+                  accept="image/*"
+                  style="display: none"
+                  required
+                />
+              </div>
+            </div>
+            <div>
+              <h5 id="id-text">Back side of ID card</h5>
+              <div class="display_image" id="display_image_id">
+                <label for="image_input_id" class="btn-face-add">+ Add</label>
+                <input
+                  type="file"
+                  name="files"
+                  id="image_input_id"
+                  accept="image/*"
+                  style="display: none"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+        </form>
+        <section id="button-below-a">
+          <button
+            onclick="a_to_b()"
+            type="button"
+            class="btn btn-secondary w-100"
+          >
+            Continue
+          </button>
+        </section>
+      </div>
+    </div>
+    <!-- end page A -->
+
+    <!-- Start Page B -->
+    <div class="wrap-color" id="page-b">
+      <div class="page-b">
+        <nav class="main-nav">
+          <div class="nav-icon">
+            <span
+              class="material-symbols-outlined"
+              onclick="b_to_a()"
+              style="cursor: pointer"
+            >
+              keyboard_backspace
+            </span>
+          </div>
+          <h3>Allow to access camera</h3>
+          <h4 id="text-header2">Take a photo and store <br /></h4>
+          <h4 id="text-header3">Example</h4>
+        </nav>
+        <!--End Nav -->
+
+        <!-- Start content -->
+        <form id="image-face">
+          <section class="content">
+            <div class="image-example" id="image-example">
+              <img src="./static/image/Face_exp.jpg" alt="" />
+            </div>
+
+            <div class="main-text">
+              <div class="text text-correct">
+               <i class="fa-solid fa-check"></i>
+               <h6>E-KYC refers to the process of verifying the identity and personal information of individuals electronically,</h6>
+             </div>
+              <div class="text text-correct">
+                <i class="fa-solid fa-check"></i>
+                <h6>Please allow permission to access your camera</h6>
+              </div>
+              <div class="text text-correct">
+                <i class="fa-solid fa-check"></i>
+                <h6>
+                 This process will save only your a face photo.
+                </h6>
+              </div>
+
+              <div class="text text-correct">
+                <i class="fa-solid fa-check"></i>
+                <h6>For privacy, Your photo will not be saved after finished this process.</h6>
+              </div>
+            </div>
+            
+          </section>
+        </form>
+        <!-- End content -->
+        <section class="button-below">
+          <button onclick="b_to_a()" type="button" class="btn btn-light">
+            Previous
+          </button>
+          <button onclick="b_to_c()" type="button" class="btn btn-secondary">
+            Allow
+          </button>
+        </section>
+      </div>
+      <!-- End Page b -->
+    </div>
+
+    <div class="wrap-color" id="page-c">
+      <!-- Start Page c -->
+      <div class="page-c">
+        <!--Start Nav -->
+        <nav class="main-nav">
+          <div class="nav-icon">
+            <!-- <i class="fa-solid fa-arrow-left fa-lg"></i>
+            <i class="fa-solid fa-xmark fa-lg"></i> -->
+            <span
+              class="material-symbols-outlined"
+              onclick="b_to_a()"
+              style="cursor: pointer"
+            >
+              keyboard_backspace
+            </span>
+          </div>
+          <h3>Checking process</h3>
+          <h7>Example</h7>
+        </nav>
+        <!--End Nav -->
+
+        <!-- Start content -->
+        <section class="content">
+          <div class="image-aim">
+            <img src="./static/image/face_Paim.png" alt="" />
+          </div>
+          <div class="main-text">
+            <div class="text text-correct">
+              <i class="fa-solid fa-check"></i>
+              <h6>
+                Please give enough light in the room. to see all faces clearly.
+              </h6>
+            </div>
+            <div class="text text-correct">
+              <i class="fa-solid fa-check"></i>
+              <h6>Make sure your whole face is visible, center of circle.</h6>
+            </div>
+            <div class="text text-wrong">
+              <i class="fa-solid fa-xmark"></i>
+              <h6>
+                Masks, hats and sunglasses are not allowed during this process.
+              </h6>
+            </div>
+            <div class="text text-wrong">
+              <i class="fa-solid fa-xmark"></i>
+              <h6>
+                Don't move your face out of the circle during this process.
+              </h6>
+            </div>
+          </div>
+        </section>
+        <!-- End content -->
+        <section class="button-below">
+          <button onclick="c_to_b()" type="button" class="btn btn-light">
+            Previous
+          </button>
+          <button id="countDonw_button" onclick="c_to_d()" type="button" class="btn btn-secondary" disabled>
+            Allow
+          </button>
+        </section>
+      </div>
+      <!-- End Page c -->
+    </div>
+
+    <!-- Start Page D -->
+    <div class="wrap-color" id="page-d">
+      <div class="page-d">
+        <div class="video">
+          <video class="input_video" id="camera"></video>
+        </div>
+        <h5 class="text-camera" id="text-sign"></h5>
+        <div class="text-camera" id="text-time"></div>
+        <div id="avatar">
+          <!-- <img src="./static/image/OM.PNG" alt="" /> -->
+        </div>
+      </div>
+    </div>
+    <!-- End Page D -->
+    <div class="wrap-color" id="page-e">
+      <div class="page-e">
+        <div id="sign-finish"></div>
+        <h3 id="text-finish"></h3>
+      </div>
+    </div>
+    <script>
+      // this func will sending to html tage, can't access variable this scope
+      function a_to_b() {
+        var x = document.getElementById("page-a");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+      }
+      function b_to_c() {
+        var x = document.getElementById("page-b");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+      }
+      function c_to_d() {
+        var x = document.getElementById("page-c");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+        console.log('JOJOJOJOJOJO')
+      }
+
+      // Previous Button
+
+      // page b to a
+      function b_to_a() {
+        var x = document.getElementById("page-a");
+        if (x.style.display === "block") {
+          x.style.display = "none";
+        } else {
+          x.style.display = "block";
+        }
+      }
+      // page c to b
+      function c_to_b() {
+        var x = document.getElementById("page-b");
+        if (x.style.display === "block") {
+          x.style.display = "none";
+        } else {
+          x.style.display = "block";
+        }
+      }
+
+    </script>
+    <script src="/static/model.json"></script>
+    <script src="/static/group1-shard1of1.bin"></script>
+    <script src="/static/js/tf_media.js"></script>
+  </body>
+</html>

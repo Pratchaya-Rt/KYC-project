@@ -1,0 +1,53 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flask Server</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .input-number {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            outline: none;
+            margin-left: 40px;
+        }
+
+        .input-number:focus {
+            border-color: #80bdff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+      
+    </style>
+
+    <title>Esy - Test</title>
+    <link rel="icon" href="data:,">
+</head>
+<body>
+    <div class="container">
+        <div class="top-bar">
+            <img src="../static/image/back.png" alt="arrow-img" class="arrow-img">
+            <div>
+                <img src="../static/image/dot.png" alt="dot-img" class="dot-img">
+            </div>
+        </div>
+        <h1>Esy - Kyc - Test</h1>
+        <img src="../static/image/deepfake.jpg" alt="logo-Esy" class="logo-esy">
+       
+        <div class="middle">
+            <input type="number" id="inputNumber" class="input-number" placeholder="Enter a number">
+            <button class="btn btn1">Esy-Test</button>
+        </div>  
+    </div>
+
+    <script>
+        const button = document.querySelector('.btn1');
+        button.addEventListener('click', () => {
+            const id = document.getElementById('inputNumber').value;
+            console.log(id)
+            window.location.href = `http://127.0.0.1:8000/${document.getElementById('inputNumber').value}`;
+        });
+    </script>
+</body>
+</html>

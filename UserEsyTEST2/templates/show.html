@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Show Data</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+        }
+
+        h1 {
+            text-align: center;
+            color: rgb(255, 255, 255); /* RGB color: a shade of blue */
+            margin-top: 20px;
+            font-size: 36px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow:0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+
+        table {
+            width: 80%;
+            margin: 30px auto;
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: #fff;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: center;
+        }
+
+        th {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        tbody tr:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        form {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        button {
+            background: linear-gradient(to right, #FF512F, #DD2476);
+            border: none;
+            color: #fff;
+            padding: 10px 25px;
+            font-size: 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(221, 36, 118, 0.4);
+        }
+        #card {
+            height: 200px;
+        }
+        #face {
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h1>TESTING Esy E-KYC</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Status</th>
+                <th>ID card</th>
+                <th>Face</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in entries %}
+            <tr>
+                <td>{{ entry.id }}</td>
+                <td>{{ entry.status }}</td>
+                <td><img id="card" src="{{ url_for('serve_image', filename=entry.name_image1) }}"></td>
+                <td><img id="face" src="{{ url_for('serve_image', filename=entry.name_image2) }}"></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <form action="/delete_all" method="POST">
+        <button type="submit">Delete All Data</button>
+    </form>
+</body>
+</html>
